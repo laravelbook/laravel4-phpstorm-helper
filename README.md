@@ -1,6 +1,9 @@
 #laravel4-phpstorm-helper
 
-Provides Laravel 4 auto-completion and code intelligence support for the Jetbrains PhpStorm IDE.
+Provides **Laravel 4** auto-completion and code intelligence support for the **Jetbrains PhpStorm** IDE.
+
+![](http://i.imgur.com/Lf4En.png)
+![](http://i.imgur.com/WFC2T.png)
 
 ##Installation
 
