@@ -1,5 +1,5 @@
 <?php die("Access denied!");
-/*
+/**
  * ---------------- DO NOT UPLOAD THIS FILE TO LIVE SERVER ------------------------
  * Laravel IDE Helper <http://LaravelBook.com>
  * Implements code completion for Laravel 4 in JetBrains PhpStorm and SublimeText 2
@@ -25,9 +25,29 @@
  * @method	static	string	getName()	Get a unique identifier for the auth session value.
  * @method	static	string	getRecallerName()	Get the name of the cookie used to store the "recaller".
  */
-
 class Auth extends Illuminate\Auth\Guard {}
 
+/**
+ * @method	static	bool	has(string  $key)	Determine if an item exists in the cache.
+ * @method	static	mixed	get(string  $key, mixed   $default)	Retrieve an item from the cache by key.
+ * @method	static	void	put(string  $key, mixed   $value, int     $minutes)	Store an item in the cache.
+ * @method	static	void	forever(string  $key, mixed   $value)	Store an item in the cache indefinitely.
+ * @method	static	void	remember(string   $key, int      $minutes, Closure  $callback)	Get an item from the cache, or store the default value.
+ * @method	static	void	rememberForever(string   $key, Closure  $callback)	Get an item from the cache, or store the default value forever.
+ * @method	static	void	forget(string  $key)	Remove an item from the cache.
+ * @method	static	void	flush()	Remove all items from the cache.
+ * @method	static	int	getDefaultCacheTime()	Get the default cache time.
+ * @method	static	void	setDefaultCacheTime(int   $minutes)	Set the default cache time in minutes.
+ * @method	static	bool	existsInMemory(string  $key)	Determine if an item is in memory.
+ * @method	static	array	getMemory()	Get all of the values in memory.
+ * @method	static	mixed	getFromMemory(string  $key)	Get the value of an item in memory.
+ * @method	static	void	setInMemory(string  $key, mixed   $value)	Set the value of an item in memory.
+ * @method	static	bool	offsetExists(string  $key)	Determine if a cached value exists.
+ * @method	static	mixed	offsetGet(string  $key)	Retrieve an item from the cache by key.
+ * @method	static	void	offsetSet(string  $key, mixed   $value)	Store an item in the cache for the default time.
+ * @method	static	void	offsetUnset(string  $key)	Remove an item from the cache.
+ */
+class Cache extends Illuminate\Cache\Store {}
 
 /**
  * @method	static	bool	has(string  $key)	Determine if the given configuration value exists.
@@ -45,9 +65,18 @@ class Auth extends Illuminate\Auth\Guard {}
  * @method	static	bool	offsetSet(string  $key)	Set a configuration option.
  * @method	static	bool	offsetUnset(string  $key)	Unset a configuration option.
  */
-
 class Config extends Illuminate\Config\Repository {}
 
+/**
+ * @method	static	bool	has(string  $key)	Determine if a cookie exists and is not null.
+ * @method	static	mixed	get(string  $key, mixed   $default)	Get the value of the given cookie.
+ * @method	static	void	make(string  $name, string  $value, int     $minutes)	Create a new cookie instance.
+ * @method	static	void	forever(string  $name, string  $value)	Create a cookie that lasts "forever" (five years).
+ * @method	static	void	forget(string  $name)	Expire the given cookie.
+ * @method	static	void	getRequest()	Get the request instance.
+ * @method	static	void	getEncrypter()	Get the encrypter instance.
+ */
+class Cookie extends Illuminate\Cookie\CookieJar {}
 
 /**
  * @method	static	void	useDefaultQueryGrammar()	Set the query grammar to the default implementation.
@@ -88,9 +117,7 @@ class Config extends Illuminate\Config\Repository {}
  * @method	static	string	getTablePrefix()	Get the table prefix for the connection.
  * @method	static	void	withTablePrefix(Illuminate\Database\Grammar  $grammar)	Set the table prefix and return the grammar.
  */
-
 class DB extends Illuminate\Database\Connection {}
-
 
 /**
  * @var	static	void	incrementing	Indicates if the IDs are auto-incrementing.
@@ -153,9 +180,7 @@ class DB extends Illuminate\Database\Connection {}
  * @method	static	void	getConnectionResolver()	Get the connection resolver instance.
  * @method	static	void	setConnectionResolver(Illuminate\Database\ConnectionResolverInterface  $resolver)	Set the connection resolver instance.
  */
-
 class Eloquent extends Illuminate\Database\Eloquent\Model {}
-
 
 /**
  * @method	static	bool	hasTable(string  $table)	Determine if the given table exists.
@@ -167,17 +192,44 @@ class Eloquent extends Illuminate\Database\Eloquent\Model {}
  * @method	static	void	getConnection()	Get the database connection instance.
  * @method	static	void	setConnection(Illuminate\Database\Connection)	Set the database connection instance.
  */
-
 class Schema extends Illuminate\Database\Schema\Builder {}
 
+/**
+ * @method	static	string	encrypt(string  $value)	Encrypt the given value.
+ * @method	static	string	decrypt(string  $value)	Decrypt the given value.
+ */
+class Crypt extends Illuminate\Encryption\Encrypter {}
 
 /**
  * @method	static	void	stop()	Stop the propagation of the event to other listeners.
  * @method	static	bool	isStopped()	Determine if the event has been stopped from propagating.
  */
-
 class Event extends Illuminate\Events\Event {}
 
+/**
+ * @method	static	bool	exists(string  $path)	Determine if a file exists.
+ * @method	static	string	get(string  $path)	Get the contents of a file.
+ * @method	static	string	getRemote(string  $path)	Get the contents of a remote file.
+ * @method	static	mixed	getRequire(string  $path)	Get the returned value of a file.
+ * @method	static	void	requireOnce(string  $file)	Require the given file once.
+ * @method	static	int	put(string  $path, string  $contents)	Write the contents of a file.
+ * @method	static	int	append(string  $path, string  $data)	Append to a file.
+ * @method	static	bool	delete(string  $path)	Delete the file at a given path.
+ * @method	static	void	move(string  $path, string  $target)	Move a file to a new location.
+ * @method	static	void	copy(string  $path, string  $target)	Copy a file to a new location.
+ * @method	static	string	extension(string  $path)	Extract the file extension from a file path.
+ * @method	static	string	type(string  $path)	Get the file type of a given file.
+ * @method	static	int	size(string  $path)	Get the file size of a given file.
+ * @method	static	int	lastModified(string  $path)	Get the file's last modification time.
+ * @method	static	bool	isDirectory(string  $directory)	Determine if the given path is a directory.
+ * @method	static	array	glob(string  $pattern, int     $flags)	Find path names matching a given pattern.
+ * @method	static	array	filetype(string  $directory)	Get an array of all files in a directory.
+ * @method	static	bool	makeDirectory(string  $path, int     $mode, bool    $recursive)	Create a directory.
+ * @method	static	void	copyDirectory(string  $directory, string  $destination, int     $options)	Copy a directory from one location to another.
+ * @method	static	void	deleteDirectory(string  $directory, bool    $preserve)	Recursively delete a directory.
+ * @method	static	void	cleanDirectory(string  $directory)	Empty the specified directory of all files and folders.
+ */
+class File extends Illuminate\Filesystem\Filesystem {}
 
 /**
  * @method	static	string	getBootstrapFile()	Get the application bootstrap file.
@@ -205,24 +257,18 @@ class Event extends Illuminate\Events\Event {}
  * @method	static	array	getLoadedProviders()	Get the service providers that have been loaded.
  * @method	static	void	setDeferredServices(array  $services)	Set the application's deferred services.
  */
-
 class App extends Illuminate\Foundation\Application {}
-
 
 /**
  * @method	static	void	call(string  $command, array   $parameters, Symfony\Component\Console\Output\OutputInterface  $output)	Run an Artisan console command by name.
  */
-
 class Artisan extends Illuminate\Foundation\Artisan {}
-
 
 /**
  * @method	static	array	make(string  $value)	Hash the given value.
  * @method	static	bool	check(string  $value, string  $hashedValue, array   $options)	Check the given plain value against a hash.
  */
-
 class Hash extends Illuminate\Hashing\BcryptHasher {}
-
 
 /**
  * @method	static	void	instance()	Return the Request instance.
@@ -255,9 +301,40 @@ class Hash extends Illuminate\Hashing\BcryptHasher {}
  * @method	static	void	getSessionStore()	Get the Illuminate session store implementation.
  * @method	static	void	setSessionStore(Illuminate\Session\Store  $session)	Set the Illuminate session store implementation.
  */
-
 class Input extends Illuminate\Http\Request {}
 
+/**
+ * @method	static	void	instance()	Return the Request instance.
+ * @method	static	string	root()	Get the root URL for the application.
+ * @method	static	string	url()	Get the URL (no query string) for the request.
+ * @method	static	string	fullUrl()	Get the full URL for the request.
+ * @method	static	string	path()	Get the current path info for the request.
+ * @method	static	bool	is(string  $pattern)	Determine if the current request URI matches a pattern.
+ * @method	static	bool	ajax()	Determine if the request is the result of an AJAX call.
+ * @method	static	bool	secure()	Determine if the request is over HTTPS.
+ * @method	static	bool	has(string|array  $key)	Determine if the request contains a given input item.
+ * @method	static	array	all()	Get all of the input and files for the request.
+ * @method	static	string	input(string  $key, mixed   $default)	Retrieve an input item from the request.
+ * @method	static	array	only(array  $keys)	Get a subset of the items from the input data.
+ * @method	static	array	except(array  $keys)	Get all of the input except for a specified array of items.
+ * @method	static	string	query(string  $key, mixed   $default)	Retrieve a query string item from the request.
+ * @method	static	string	cookie(string  $key, mixed   $default)	Retrieve a cookie from the request.
+ * @method	static	void	file(string  $key, mixed   $default)	Retrieve a file from the request.
+ * @method	static	bool	hasFile(string  $key)	Determine if the uploaded data contains a file.
+ * @method	static	string	header(string  $key, mixed   $default)	Retrieve a header from the request.
+ * @method	static	string	server(string  $key, mixed   $default)	Retrieve a server variable from the request.
+ * @method	static	string	old(string  $key, mixed   $default)	Retrieve an old input item.
+ * @method	static	void	flash(string $filter, array  $keys)	Flash the input for the current request to the session.
+ * @method	static	void	flashOnly(dynamic  string)	Flash only some of the input to the session.
+ * @method	static	void	flashExcept(dynamic  string)	Flash only some of the input to the session.
+ * @method	static	void	flush()	Flush all of the old input from the session.
+ * @method	static	void	merge(array  $input)	Merge new input into the current request's input array.
+ * @method	static	void	replace(array  $input)	Replace the input for the current request.
+ * @method	static	object	json()	Get the JSON payload for the request.
+ * @method	static	void	getSessionStore()	Get the Illuminate session store implementation.
+ * @method	static	void	setSessionStore(Illuminate\Session\Store  $session)	Set the Illuminate session store implementation.
+ */
+class Request extends Illuminate\Http\Request {}
 
 /**
  * @var	static	void	original	The original content of the response.
@@ -265,18 +342,14 @@ class Input extends Illuminate\Http\Request {}
  * @method	static	void	setContent(mixed  $content)	Set the content on the response.
  * @method	static	mixed	getOriginalContent()	Get the original response content.
  */
-
 class Response extends Illuminate\Http\Response {}
-
 
 /**
  * @method	static	void	useFiles(string  $path, string  $level)	Register a file log handler.
  * @method	static	void	useDailyFiles(string  $path, int     $days, string  $level)	Register a daily file log handler.
  * @method	static	void	getMonolog()	Get the underlying Monolog instance.
  */
-
 class Log extends Illuminate\Log\Writer {}
-
 
 /**
  * @method	static	void	alwaysFrom(string  $address, string  $name)	Set the global from address and name.
@@ -288,9 +361,7 @@ class Log extends Illuminate\Log\Writer {}
  * @method	static	void	setLogger(Illuminate\Log\Writer  $logger)	Set the log writer instance.
  * @method	static	void	setContainer(Illuminate\Container  $container)	Set the IoC container instance.
  */
-
 class Mail extends Illuminate\Mail\Mailer {}
-
 
 /**
  * @method	static	void	setupPaginationContext()	Setup the pagination context (current and last page).
@@ -308,9 +379,7 @@ class Mail extends Illuminate\Mail\Mailer {}
  * @method	static	void	offsetSet(mixed  $key, mixed  $value)	Set the item at the given offset.
  * @method	static	void	offsetUnset(mixed  $key)	Unset the item at the given key.
  */
-
 class Paginator extends Illuminate\Pagination\Paginator {}
-
 
 /**
  * @method	static	void	connect()	Connect to the Redis database.
@@ -322,9 +391,7 @@ class Paginator extends Illuminate\Pagination\Paginator {}
  * @method	static	void	fileWrite(string  $commnad)	Write the given command to the file resource.
  * @method	static	resource	getConnection()	Get the Redis socket connection.
  */
-
 class Redis extends Illuminate\Redis\Database {}
-
 
 /**
  * @method	static	void	back(int    $status, array  $headers)	Create a new redirect response to the previous location.
@@ -334,9 +401,7 @@ class Redis extends Illuminate\Redis\Database {}
  * @method	static	void	action(string  $action, array   $parameters, int     $status, array   $headers)	Create a new redirect response to a controller action.
  * @method	static	void	setSession(Illuminate\Session\Store  $session)	Set the active session store.
  */
-
 class Redirect extends Illuminate\Routing\Redirector {}
-
 
 /**
  * @method	static	void	get(string  $pattern, mixed   $action)	Add a new route to the collection.
@@ -373,9 +438,7 @@ class Redirect extends Illuminate\Routing\Redirector {}
  * @method	static	void	getRoutes()	Retrieve the entire route collection.
  * @method	static	void	setContainer(Illuminate\Container  $container)	Set the container instance on the router.
  */
-
 class Route extends Illuminate\Routing\Router {}
-
 
 /**
  * @method	static	string	to(string  $path, array   $parameters, bool    $secure)	Generate a absolute URL to the given path.
@@ -390,9 +453,7 @@ class Route extends Illuminate\Routing\Router {}
  * @method	static	void	getGenerator()	Get the Symfony URL generator instance.
  * @method	static	void	setGenerator(Symfony\Component\Routing\Generator\UrlGenerator  $generator)	Get the Symfony URL generator instance.
  */
-
 class URL extends Illuminate\Routing\UrlGenerator {}
-
 
 /**
  * @method	static	void	beforeFilter(string  $filter, array   $options)	Register a new "before" filter on the controller.
@@ -400,9 +461,7 @@ class URL extends Illuminate\Routing\UrlGenerator {}
  * @method	static	void	callAction(Illuminate\Container  $container, Illuminate\Routing\Router  $router, string  $method, array   $parameters)	Execute an action on the controller.
  * @method	static	array	getFilters()	Get the code registered filters.
  */
-
 class Controller extends Illuminate\Routing\Controllers\Controller {}
-
 
 /**
  * @method	static	bool	has(string  $key, string  $locale)	Determine if a translation exists.
@@ -417,9 +476,7 @@ class Controller extends Illuminate\Routing\Controllers\Controller {}
  * @method	static	void	getSymfonyTranslator()	Get the base Symfony translator instance.
  * @method	static	void	setSymfonyTranslator(Symfony\Translation\Translator  $trans)	Get the base Symfony translator instance.
  */
-
 class Lang extends Illuminate\Translation\Translator {}
-
 
 /**
  * @method	static	bool	passes()	Determine if the data passes the validation rules.
@@ -440,9 +497,7 @@ class Lang extends Illuminate\Translation\Translator {}
  * @method	static	void	errors()	An alternative more semantic shortcut to the message container.
  * @method	static	void	getMessageBag()	Get the messages for the instance.
  */
-
 class Validator extends Illuminate\Validation\Factory {}
-
 
 /**
  * @method	static	void	make(string  $view, array   $data)	Get a evaluated view contents for the given view.
@@ -470,5 +525,4 @@ class Validator extends Illuminate\Validation\Factory {}
  * @method	static	array	getShared()	Get all of the shared data for the environment.
  * @method	static	array	getSections()	Get the entire array of sections.
  */
-
 class View extends Illuminate\View\Environment {}
