@@ -5,7 +5,7 @@
  * Implements code completion for Laravel 4 in JetBrains PhpStorm and SublimeText 2
  * --------------------------------------------------------------------------------
  */
- 
+
 /**
  * @method	static	bool	check()	Determine if the current user is authenticated.
  * @method	static	bool	guest()	Determine if the current user is a guest.
@@ -14,9 +14,9 @@
  * @method	static	void	login(Illuminate\Auth\UserInterface  $user, bool  $remember)	Log a user into the application.
  * @method	static	void	logout()	Log the user out of the application.
  * @method	static	void	getCookieJar()	Get the cookie creator instance used by the guard.
- * @method	static	void	setCookieJar(Illuminate\CookieJar  $cookie)	Set the cookie creator instance used by the guard.
+ * @method	static	void	setCookieJar(Illuminate\Cookie\CookieJar  $cookie)	Set the cookie creator instance used by the guard.
  * @method	static	void	getDispatcher()	Get the event dispatcher instance.
- * @method	static	void	setDispatcher(Illuminate\Events\Dispatcher)	Set the event dispatcher instance.
+ * @method	static	void	setDispatcher(Illuminate\Events\Dispatcher $events)	Set the event dispatcher instance.
  * @method	static	void	getSession()	Get the session store used by the guard.
  * @method	static	array	getQueuedCookies()	Get the cookies queued by the guard.
  * @method	static	void	getProvider()	Get the user provider used by the guard.
@@ -42,18 +42,17 @@ class Auth extends Illuminate\Auth\Guard {}
  * @method	static	array	getMemory()	Get all of the values in memory.
  * @method	static	mixed	getFromMemory(string  $key)	Get the value of an item in memory.
  * @method	static	void	setInMemory(string  $key, mixed   $value)	Set the value of an item in memory.
- * @method	static	bool	offsetExists(string  $key)	Determine if a cached value exists.
- * @method	static	mixed	offsetGet(string  $key)	Retrieve an item from the cache by key.
- * @method	static	void	offsetSet(string  $key, mixed   $value)	Store an item in the cache for the default time.
- * @method	static	void	offsetUnset(string  $key)	Remove an item from the cache.
+ * @method	static	bool	offsetExists(mixed  $key)	Determine if a cached value exists.
+ * @method	static	bool	offsetGet(mixed  $key)	Retrieve an item from the cache by key.
+ * @method	static	void	offsetSet(mixed  $key, mixed   $value)	Store an item in the cache for the default time.
+ * @method	static	void	offsetUnset(mixed  $key)	Remove an item from the cache.
  */
-class Cache extends Illuminate\Cache\Store {}
+abstract class Cache extends Illuminate\Cache\Store {}
 
 /**
  * @method	static	bool	has(string  $key)	Determine if the given configuration value exists.
  * @method	static	mixed	get(string  $key, mixed   $default)	Get the specified configuration value.
  * @method	static	void	set(string  $key, mixed   $value)	Set a given configuration value.
- * @method	static	void	getEnvironment(string  $package, string  $hint, string  $namespace)	Register a package for cascading configuration.
  * @method	static	void	afterLoading(string   $namespace, Closure  $callback)	Register an after load callback for a given namespace.
  * @method	static	void	addNamespace(string  $namespace, string  $hint)	Add a new namespace to the loader.
  * @method	static	void	getLoader()	Get the loader implementation.
@@ -86,12 +85,9 @@ class Cookie extends Illuminate\Cookie\CookieJar {}
  * @method	static	void	table(string  $table)	Begin a fluent query against a database table.
  * @method	static	void	raw(mixed  $value)	Get a new raw query expression.
  * @method	static	mixed	selectOne(string  $query, array   $bindings)	Run a select statement and return a single result.
- * @method	static	array	pretending(string  $query, array   $bindings)	Run a select statement against the database.
- * @method	static	bool	insert(string  $query, array   $bindings)	Run an insert statement against the database.
- * @method	static	int	update(string  $query, array   $bindings)	Run an update statement against the database.
- * @method	static	int	delete(string  $query, array   $bindings)	Run a delete statement against the database.
- * @method	static	bool	pretending(string  $query, array   $bindings)	Execute an SQL statement and return the boolean result.
- * @method	static	int	pretending(string  $query, array   $bindings)	Run an SQL statement and get the number of rows affected.
+ * @method	static	int 	insert(string  $query, array   $bindings=array())	Run an insert statement against the database.
+ * @method	static	int     update(string  $query, array   $bindings)	Run an update statement against the database.
+ * @method	static	int	    delete(string  $query, array   $bindings)	Run a delete statement against the database.
  * @method	static	array	prepareBindings(array  $bindings)	Prepare the query bindings for execution.
  * @method	static	mixed	transaction(Closure  $callback)	Execute a Closure within a transaction.
  * @method	static	array	pretend(Closure  $callback)	Execute the given callback in "dry run" mode.
@@ -235,23 +231,23 @@ class File extends Illuminate\Filesystem\Filesystem {}
  * @method	static	string	getBootstrapFile()	Get the application bootstrap file.
  * @method	static	void	registerAliasLoader(array  $aliases)	Register the aliased class loader.
  * @method	static	void	ExceptionServiceProvider()	Start the exception handling for the request.
- * @method	static	string	detectEnvironment(array|string  $environments)	Detect the application's current environment.
+ * @method	static	string	detectEnvironment( $environments)	Detect the application's current environment.
  * @method	static	bool	runningInConsole()	Determine if we are running in the console.
  * @method	static	bool	runningUnitTests()	Determine if we are running unit tests.
  * @method	static	void	register(Illuminate\Support\ServiceProvider  $provider, array  $options)	Register a service provider with the application.
  * @method	static	mixed	make(string  $abstract, array   $parameters)	Resolve the given type from the container.
  * @method	static	void	booting(mixed  $callback)	Register a new boot event listener.
- * @method	static	void	before(Closure|string  $callback)	Register a "before" application filter.
- * @method	static	void	after(Closure|string  $callback)	Register an "after" application filter.
- * @method	static	void	close(Closure|string  $callback)	Register a "close" application filter.
- * @method	static	void	finish(Closure|string  $callback)	Register a "finish" application filter.
+ * @method	static	void	before(string  $callback)	Register a "before" application filter.
+ * @method	static	void	after(string  $callback)	Register an "after" application filter.
+ * @method	static	void	close(string  $callback)	Register a "close" application filter.
+ * @method	static	void	finish(string  $callback)	Register a "finish" application filter.
  * @method	static	void	run()	Handles the given request and delivers the response.
- * @method	static	void	dispatch(Illuminate\Foundation\Request  $request)	Handle the given request and get the response.
- * @method	static	void	handle(Illuminate\Foundation\Request  $request, int   $type, bool  $catch)	Handle the given request and get the response.
- * @method	static	void	prepareRequest(Illuminate\Foundation\Request  $request)	Prepare the request by injecting any services.
- * @method	static	void	prepareResponse(mixed  $value, Illuminate\Foundation\Request  $request)	Prepare the given value as a Response object.
+ * @method	static	void	dispatch(\Symfony\Component\HttpFoundation\Request  $request)	Handle the given request and get the response.
+ * @method	static	void	handle(\Symfony\Component\HttpFoundation\Request  $request, int   $type, bool  $catch)	Handle the given request and get the response.
+ * @method	static	void	prepareRequest(\Symfony\Component\HttpFoundation\Request  $request)	Prepare the request by injecting any services.
+ * @method	static	void	prepareResponse(mixed  $value, \Symfony\Component\HttpFoundation\Request  $request)	Prepare the given value as a Response object.
  * @method	static	void	setLocale(string  $locale)	Set the current application locale.
- * @method	static	void	abort(int     $code, string  $message, array   $headers)	Throw an HttpException with the given data.
+ * @method	static	void	abort(int     $code, string  $message, array   $headers=array())	Throw an HttpException with the given data.
  * @method	static	void	error(Closure  $callback)	Register an application error handler.
  * @method	static	void	NotFoundHttpException(Closure  $callback)	Register a 404 error handler.
  * @method	static	array	getLoadedProviders()	Get the service providers that have been loaded.
@@ -260,12 +256,12 @@ class File extends Illuminate\Filesystem\Filesystem {}
 class App extends Illuminate\Foundation\Application {}
 
 /**
- * @method	static	void	call(string  $command, array   $parameters, Symfony\Component\Console\Output\OutputInterface  $output)	Run an Artisan console command by name.
+ * @method	static	void	call(string  $command, array   $parameters, \Symfony\Component\Console\Output\ConsoleOutputInterface  $output)	Run an Artisan console command by name.
  */
 class Artisan extends Illuminate\Foundation\Artisan {}
 
 /**
- * @method	static	array	make(string  $value)	Hash the given value.
+ * @method	static	array	make(string  $value, array $options)	Hash the given value.
  * @method	static	bool	check(string  $value, string  $hashedValue, array   $options)	Check the given plain value against a hash.
  */
 class Hash extends Illuminate\Hashing\BcryptHasher {}
@@ -279,7 +275,7 @@ class Hash extends Illuminate\Hashing\BcryptHasher {}
  * @method	static	bool	is(string  $pattern)	Determine if the current request URI matches a pattern.
  * @method	static	bool	ajax()	Determine if the request is the result of an AJAX call.
  * @method	static	bool	secure()	Determine if the request is over HTTPS.
- * @method	static	bool	has(string|array  $key)	Determine if the request contains a given input item.
+ * @method	static	bool	has( $key)	Determine if the request contains a given input item.
  * @method	static	array	all()	Get all of the input and files for the request.
  * @method	static	string	input(string  $key, mixed   $default)	Retrieve an input item from the request.
  * @method	static	array	only(array  $keys)	Get a subset of the items from the input data.
@@ -312,7 +308,7 @@ class Input extends Illuminate\Http\Request {}
  * @method	static	bool	is(string  $pattern)	Determine if the current request URI matches a pattern.
  * @method	static	bool	ajax()	Determine if the request is the result of an AJAX call.
  * @method	static	bool	secure()	Determine if the request is over HTTPS.
- * @method	static	bool	has(string|array  $key)	Determine if the request contains a given input item.
+ * @method	static	bool	has( $key)	Determine if the request contains a given input item.
  * @method	static	array	all()	Get all of the input and files for the request.
  * @method	static	string	input(string  $key, mixed   $default)	Retrieve an input item from the request.
  * @method	static	array	only(array  $keys)	Get a subset of the items from the input data.
@@ -325,8 +321,8 @@ class Input extends Illuminate\Http\Request {}
  * @method	static	string	server(string  $key, mixed   $default)	Retrieve a server variable from the request.
  * @method	static	string	old(string  $key, mixed   $default)	Retrieve an old input item.
  * @method	static	void	flash(string $filter, array  $keys)	Flash the input for the current request to the session.
- * @method	static	void	flashOnly(dynamic  string)	Flash only some of the input to the session.
- * @method	static	void	flashExcept(dynamic  string)	Flash only some of the input to the session.
+ * @method	static	void	flashOnly()	Flash only some of the input to the session.
+ * @method	static	void	flashExcept()	Flash only some of the input to the session.
  * @method	static	void	flush()	Flush all of the old input from the session.
  * @method	static	void	merge(array  $input)	Merge new input into the current request's input array.
  * @method	static	void	replace(array  $input)	Replace the input for the current request.
@@ -359,7 +355,7 @@ class Log extends Illuminate\Log\Writer {}
  * @method	static	Swift_Mailer	getSwiftMailer()	Get the Swift Mailer instance.
  * @method	static	void	setSwiftMailer(Swift_Mailer  $swift)	Set the Swift Mailer instance.
  * @method	static	void	setLogger(Illuminate\Log\Writer  $logger)	Set the log writer instance.
- * @method	static	void	setContainer(Illuminate\Container  $container)	Set the IoC container instance.
+ * @method	static	void	setContainer(Illuminate\Container\Container  $container)	Set the IoC container instance.
  */
 class Mail extends Illuminate\Mail\Mailer {}
 
@@ -413,7 +409,7 @@ class Redirect extends Illuminate\Routing\Redirector {}
  * @method	static	void	any(string  $pattern, mixed   $action)	Add a new route to the collection.
  * @method	static	void	controllers(array  $controllers)	Register an array of controllers with wildcard routing.
  * @method	static	void	controller(string  $controller, string  $uri)	Route a controller to a URI with wildcard routing.
- * @method	static	void	resource(string  $resource, string  $controller, array   $options)	Route a resource to a controller.
+ * @method	static	void	resource(string  $resource, string  $controller, array   $options=array())	Route a resource to a controller.
  * @method	static	void	group(array    $attributes, Closure  $callback)	Create a route group with shared attributes.
  * @method	static	void	makeReferences(Illuminate\Routing\Route  $route, string  $original)	Replace any route back-references in a route.
  * @method	static	void	dispatch(Symfony\Component\HttpFoundation\Request  $request)	Get the response for a given request.
@@ -424,9 +420,9 @@ class Redirect extends Illuminate\Routing\Redirector {}
  * @method	static	void	addFilter(string   $name, Closure|string  $callback)	Register a new filter with the application.
  * @method	static	Closure	getFilter(string   $name)	Get a registered filter callback.
  * @method	static	void	matchFilter(string  $pattern, string|array  $names)	Tie a registered filter to a URI pattern.
- * @method	static	array	findPatternFilters(Illuminate\Foundation\Request  $request)	Find the patterned filters matching a request.
+ * @method	static	array	findPatternFilters(Symfony\Component\HttpFoundation\Request  $request)	Find the patterned filters matching a request.
  * @method	static	mixed	callFinishFilter(Symfony\Component\HttpFoundation\Request   $request, Symfony\Component\HttpFoundation\Response  $response)	Call the "finish" global filter.
- * @method	static	void	prepare(mixed  $value, Illuminate\Foundation\Request  $request)	Prepare the given value as a Response object.
+ * @method	static	void	prepare(mixed  $value, Symfony\Component\HttpFoundation\Request  $request)	Prepare the given value as a Response object.
  * @method	static	bool	currentRouteNamed(string  $name)	Determine if the current route has a given name.
  * @method	static	bool	currentRouteUses(string  $action)	Determine if the current route uses a given controller action.
  * @method	static	bool	filtersEnabled()	Determine if route filters are enabled.
@@ -436,7 +432,7 @@ class Redirect extends Illuminate\Routing\Redirector {}
  * @method	static	void	getCurrentRoute()	Get the current route being executed.
  * @method	static	void	setCurrentRoute(Illuminate\Routing\Route  $route)	Set the current route on the router.
  * @method	static	void	getRoutes()	Retrieve the entire route collection.
- * @method	static	void	setContainer(Illuminate\Container  $container)	Set the container instance on the router.
+ * @method	static	void	setContainer(Illuminate\Container\Container  $container)	Set the container instance on the router.
  */
 class Route extends Illuminate\Routing\Router {}
 
@@ -458,7 +454,7 @@ class URL extends Illuminate\Routing\UrlGenerator {}
 /**
  * @method	static	void	beforeFilter(string  $filter, array   $options)	Register a new "before" filter on the controller.
  * @method	static	void	afterFilter(string  $filter, array   $options)	Register a new "after" filter on the controller.
- * @method	static	void	callAction(Illuminate\Container  $container, Illuminate\Routing\Router  $router, string  $method, array   $parameters)	Execute an action on the controller.
+ * @method	static	void	callAction(Illuminate\Container\Container  $container, Illuminate\Routing\Router  $router, string  $method, array   $parameters)	Execute an action on the controller.
  * @method	static	array	getFilters()	Get the code registered filters.
  */
 class Controller extends Illuminate\Routing\Controllers\Controller {}
@@ -474,7 +470,7 @@ class Controller extends Illuminate\Routing\Controllers\Controller {}
  * @method	static	string	getLocale()	Get the default locale being used.
  * @method	static	void	setLocale(string  $locale)	Set the default locale.
  * @method	static	void	getSymfonyTranslator()	Get the base Symfony translator instance.
- * @method	static	void	setSymfonyTranslator(Symfony\Translation\Translator  $trans)	Get the base Symfony translator instance.
+ * @method	static	void	setSymfonyTranslator(Symfony\Component\Translation\Translator  $trans)	Get the base Symfony translator instance.
  */
 class Lang extends Illuminate\Translation\Translator {}
 
@@ -521,7 +517,7 @@ class Validator extends Illuminate\Validation\Factory {}
  * @method	static	void	getFinder()	Get the view finder instance.
  * @method	static	void	getDispatcher()	Get the event dispatcher instance.
  * @method	static	void	getContainer()	Get the IoC container instance.
- * @method	static	void	setContainer(Illuminate\Container  $container)	Set the IoC container instance.
+ * @method	static	void	setContainer(Illuminate\Container\Container  $container)	Set the IoC container instance.
  * @method	static	array	getShared()	Get all of the shared data for the environment.
  * @method	static	array	getSections()	Get the entire array of sections.
  */
