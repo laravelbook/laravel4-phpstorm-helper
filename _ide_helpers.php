@@ -320,6 +320,42 @@ class Artisan extends Illuminate\Foundation\Artisan {}
 class Input extends Illuminate\Http\Request {}
 
 /**
+ * @method  static  void    instance()  Return the Request instance.
+ * @method  static  string  root()  Get the root URL for the application.
+ * @method  static  string  url()   Get the URL (no query string) for the request.
+ * @method  static  string  fullUrl()   Get the full URL for the request.
+ * @method  static  string  path()  Get the current path info for the request.
+ * @method  static  string  segment(string  $index, mixed   $default = null)    Get a segment from the URI (1 based index).
+ * @method  static  array   segments()  Get all of the segments for the request path.
+ * @method  static  bool    is(string  $pattern)    Determine if the current request URI matches a pattern.
+ * @method  static  bool    ajax()  Determine if the request is the result of an AJAX call.
+ * @method  static  bool    secure()    Determine if the request is over HTTPS.
+ * @method  static  bool    has(string  $key)   Determine if the request contains a given input item.
+ * @method  static  array   all()   Get all of the input and files for the request.
+ * @method  static  string  input(string  $key = null, mixed   $default = null) Retrieve an input item from the request.
+ * @method  static  array   only(array  $keys)  Get a subset of the items from the input data.
+ * @method  static  array   except(array  $keys)    Get all of the input except for a specified array of items.
+ * @method  static  string  query(string  $key = null, mixed   $default = null) Retrieve a query string item from the request.
+ * @method  static  string  cookie(string  $key = null, mixed   $default = null)    Retrieve a cookie from the request.
+ * @method  static  void    file(string  $key = null, mixed   $default = null)  Retrieve a file from the request.
+ * @method  static  bool    hasFile(string  $key)   Determine if the uploaded data contains a file.
+ * @method  static  string  header(string  $key = null, mixed   $default = null)    Retrieve a header from the request.
+ * @method  static  string  server(string  $key = null, mixed   $default = null)    Retrieve a server variable from the request.
+ * @method  static  string  old(string  $key = null, mixed   $default = null)   Retrieve an old input item.
+ * @method  static  void    flash(string $filter = null, array  $keys = null)   Flash the input for the current request to the session.
+ * @method  static  void    flashOnly(dynamic  $keys)   Flash only some of the input to the session.
+ * @method  static  void    flashExcept(dynamic  $keys) Flash only some of the input to the session.
+ * @method  static  void    flush() Flush all of the old input from the session.
+ * @method  static  void    merge(array  $input)    Merge new input into the current request's input array.
+ * @method  static  void    replace(array  $input)  Replace the input for the current request.
+ * @method  static  object  json()  Get the JSON payload for the request.
+ * @method  static  void    getSessionStore()   Get the Illuminate session store implementation.
+ * @method  static  void    setSessionStore(Illuminate\Session\Store  $session) Set the Illuminate session store implementation.
+ * @method  static  bool    hasSessionStore()   Determine if the session store has been set.
+ */
+class Request extends Illuminate\Http\Request {}
+
+/**
  * @var	static	void	original	The original content of the response.
  * @method	static	void	withCookie(Symfony\Component\HttpFoundation\Cookie  $cookie)	Add a cookie to the response.
  * @method	static	void	setContent(mixed  $content)	Set the content on the response.
