@@ -346,7 +346,7 @@ class Response extends Illuminate\Http\Response {}
 
 /**
  * @method	static	void	useFiles(string  $path, string  $level)	Register a file log handler.
- * @method	static	void	useDailyFiles(string  $path, int     $days, string  $level)	Register a daily file log handler.
+ * @method	static	void	useDailyFiles(string  $path, int     $days = 0, string  $level = 'debug')	Register a daily file log handler.
  * @method	static	void	getMonolog()	Get the underlying Monolog instance.
  */
 class Log extends Illuminate\Log\Writer {}
