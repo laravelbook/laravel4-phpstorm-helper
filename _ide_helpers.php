@@ -500,7 +500,7 @@ class Lang extends Illuminate\Translation\Translator {}
 class Validator extends Illuminate\Validation\Factory {}
 
 /**
- * @method	static	void	make(string  $view, array   $data)	Get a evaluated view contents for the given view.
+ * @method	static	string	make(string  $view, array   $data = array())	Get a evaluated view contents for the given view.
  * @method	static	string	renderEach(string  $view, array   $data, string  $iterator, string  $empty)	Get the rendered contents of a partial from a loop.
  * @method	static	void	share(string  $key, mixed   $value)	Add a piece of shared data to the environment.
  * @method	static	Closure	composer(string  $view, Closure|string  $callback)	Register a view composer event.
